@@ -24,12 +24,15 @@ public class AnchorManager : MonoBehaviour {
 				TrackableHitFlags.FeaturePointWithSurfaceNormal;
 			
 			if (Frame.Raycast(touch.position.x, touch.position.y, raycastFilter, out hit)) {
+				//Random height from plane
 				//Vector3 height = new Vector3(0f, 0f, 0f);
 				//height.y = Random.Range(0.1f, 1.0f);
 
 				anchor = hit.Trackable.CreateAnchor(hit.Pose);
 				var anchoredObject = Instantiate(anchoredPrefab, hit.Pose.position, hit.Pose.rotation, anchor.transform);
-				anchoredObject.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
+				
+				//Random color generator
+				//anchoredObject.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
 				
 				//make the  object look at camera
 				/*if ((hit.Flags & TrackableHitFlags.PlaneWithinPolygon) != TrackableHitFlags.None) {

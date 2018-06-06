@@ -1,12 +1,14 @@
-﻿using System.Collections;
+/* ARCore 1.2.0 */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GoogleARCore;
-using GoogleARCore.HelloAR;
+using GoogleARCore.Examples.Common;
 
 public class TrackedPlaneGenerator : MonoBehaviour {
 
-	private List<TrackedPlane> newPlanes = new List<TrackedPlane>();
+	private List<DetectedPlane> newPlanes = new List<DetectedPlane>();
 	//private List<TrackedPlane> allPlanes = new List<TrackedPlane>();
 	public GameObject trackedPlanePrefab;
 
@@ -22,11 +24,11 @@ public class TrackedPlaneGenerator : MonoBehaviour {
 			return;
 		}
 
-		Session.GetTrackables<TrackedPlane>(newPlanes, TrackableQueryFilter.New);
+		Session.GetTrackables<DetectedPlane>(newPlanes, TrackableQueryFilter.New);
 
 		for (int i = 0; i < newPlanes.Count; i++) {
 			GameObject planeObject = Instantiate(trackedPlanePrefab, Vector3.zero, Quaternion.identity, transform);
-			planeObject.GetComponent<TrackedPlaneVisualizer>().Initialize(newPlanes[i]);
+			planeObject.GetComponent<DetectedPlaneVisualizer>().Initialize(newPlanes[i]);
 		}
 	}
 }
